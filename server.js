@@ -33,7 +33,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/hwPopulater";
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 
 
@@ -42,7 +42,7 @@ var request = require('request');
 request('http://www.wired.com', function (error, response, body) {
   console.log('error:', error); // Print the error if one occurred
   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  //console.log('body:', body); // Print the HTML for the wired homepage.
+  console.log('body:', body); // Print the HTML for the wired homepage.
 });
 
 // A GET route for scraping the echoJS website
