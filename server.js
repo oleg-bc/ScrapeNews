@@ -21,8 +21,21 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/hwPopulater", { useNewUrlParser: true });
+
+
+//mongoose.connect("mongodb://localhost/hwPopulater", { useNewUrlParser: true });
 // Routes
+
+
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/hwPopulater";
+
+// Set mongoose to leverage built in JavaScript ES6 Promises
+// Connect to the Mongo DB
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
+
+
 
 
 var request = require('request');
